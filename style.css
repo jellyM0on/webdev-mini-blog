@@ -42,6 +42,7 @@ nav {
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
   position: sticky;
   top: 0;
@@ -117,4 +118,22 @@ nav {
   background-color: var(--grey-dark-hover);
   color: white;
   cursor: pointer;
+}
+
+.nav-profile {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.nav-profile img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+.nav-profile .profile-username {
+  font-size: smaller;
+  color: var(--grey-dark-hover);
 }
