@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mini Blog</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./main.js"></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -50,7 +49,31 @@
       </section>
     </nav>
     <main>
-      <!-- TODO: Add main section -->
+      <section class="main-header">
+        <button>All Posts</button>
+        <button>My Posts</button>
+      </section>
+
+      <section class="main-input">
+        <img src="./assets/user.svg" alt="user" />
+        <form>
+          <textarea
+            name=""
+            id="post-input"
+            placeholder="Write your post here..."
+            resize="none"
+            maxlength="500"
+            oninput="updateCharCount()"
+          ></textarea>
+          <div class="input-details">
+            <p id="char-counter"><span id="char-count">0</span>/500</p>
+            <button class="post-btn">Post</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="main-posts"></section>
     </main>
+    <script src="./main.js"></script>
   </body>
 </html>

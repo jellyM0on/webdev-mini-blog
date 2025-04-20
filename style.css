@@ -137,3 +137,70 @@ nav {
   font-size: smaller;
   color: var(--grey-dark-hover);
 }
+
+/* main */
+main {
+  width: 100%;
+}
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  height: 3rem;
+}
+
+.main-header button {
+  width: 50%;
+  background: none;
+  border: none;
+  border-bottom: solid 1px var(--grey);
+  border-right: solid 1px var(--grey);
+}
+
+.main-header button:hover {
+  background-color: var(--grey-light-hover);
+  cursor: pointer;
+}
+
+.main-input {
+  box-sizing: border-box;
+  padding: 1rem 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: start;
+  width: 100%;
+}
+
+.main-input img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.main-input form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.main-input textarea {
+  resize: none;
+  border-radius: 12px;
+  border: solid 1px var(--grey);
+  padding: 1rem;
+  height: 4rem;
+}
+
+.input-details {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+#char-counter {
+  color: var(--grey-dark-hover);
+  font-size: smaller;
+}
