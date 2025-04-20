@@ -74,13 +74,16 @@
 
       <section class="main-posts">
         <div class="posts-filters">
-          <label for="sort-filters">Sort By:</label>
+          <label for="sort-filters" id="sort-filters-lbl">Sort By:</label>
           <select name="sort-filters" id="sort-filters">
-            <option value="Title" id="title"></option>
             <option value="userId">User ID</option>
-            <option value="postId">Post ID</option>
+            <option value="title">Title</option>
+            <option value="userName">User Name</option>
+            <option value="id" default>Post ID</option>
           </select>
-          <button></button>
+          <button id="sort-type">
+            <img src="assets/sort-swap.svg" alt="Sort Swap" />
+          </button>
         </div>
         <ul id="posts-list"></ul>
       </section>

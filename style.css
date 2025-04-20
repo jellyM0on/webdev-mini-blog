@@ -206,11 +206,48 @@ main {
 }
 
 /* post */
+.main-posts {
+  padding: 0 2rem 2rem 2rem;
+}
+
+.posts-filters {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#sort-filters-lbl {
+  font-size: smaller;
+  color: var(--grey-dark-hover);
+}
+
+#sort-filters {
+  border: none;
+}
+
+.posts-filters button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+
+.posts-filters button:hover {
+  background-color: var(--grey-light-hover);
+}
+
+.posts-filters img {
+  width: 1rem;
+  height: 1rem;
+}
+
 #posts-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 0 2rem 2rem 2rem;
 }
 
 .post {
@@ -233,7 +270,7 @@ main {
 }
 
 .post-user-id-name {
-  font-weight:normal;
+  font-weight: normal;
   font-size: smaller;
   color: var(--grey-dark-hover);
 }

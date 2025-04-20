@@ -63,6 +63,12 @@ function createPosts(posts) {
   });
 }
 
+// Delete all posts
+function deletePosts() {
+  const $postsList = $("#posts-list");
+  $postsList.empty();
+}
+
 // Get posts
 function getPostsWithUsers() {
   $.when(
@@ -87,4 +93,41 @@ function getPostsWithUsers() {
     currentPostCount = 10;
     createPosts(postsWithNames.slice(0, 10));
   });
+}
+
+// Sort functionality
+
+let sortBy = "userId";
+let sortType = "asc";
+
+$("#sort-filters").on("change", function () {
+  sortBy = $(this).val();
+  sortPosts(sortBy, sortType);
+});
+
+$("#sort-type").on("click", function () {
+  sortType === "asc" ? (sortType = "desc") : (sortType = "asc");
+  sortPosts(sortBy, sortType);
+});
+
+function sortPosts(sortBy, sortType) {
+  allPosts = allPosts.sort((a, b) => {
+    let valA = a[sortBy];
+    let valB = b[sortBy];
+
+    if (typeof valA === "string") valA = valA.toLowerCase();
+    if (typeof valB === "string") valB = valB.toLowerCase();
+
+    if (valA === valB) return 0;
+
+    if (sortType === "asc") {
+      return valA > valB ? 1 : -1;
+    } else {
+      return valA < valB ? 1 : -1;
+    }
+  });
+
+  deletePosts(); //Reset posts
+  createPosts(allPosts.slice(0, 10));
+  currentPostCount = 10;
 }
