@@ -59,14 +59,14 @@ function createPosts(posts) {
             
         </li>
         `);
-    console.log(post);
   });
 }
 
-// Delete all posts
-function deletePosts() {
+function resetPosts(posts) {
   const $postsList = $("#posts-list");
   $postsList.empty();
+  createPosts(posts.slice(0, 10));
+  currentPostCount = 10;
 }
 
 // Get posts
@@ -127,7 +127,34 @@ function sortPosts(sortBy, sortType) {
     }
   });
 
-  deletePosts(); //Reset posts
-  createPosts(allPosts.slice(0, 10));
-  currentPostCount = 10;
+  resetPosts(allPosts);
+}
+
+// Filter functionality
+let showAllPosts = true;
+
+$("#all-posts-btn").on("click", function () {
+  showAllPosts = true;
+  filterPosts(showAllPosts);
+
+  $("#my-posts-btn").removeClass("active-btn");
+  $("#all-posts-btn").addClass("active-btn");
+});
+
+$("#my-posts-btn").on("click", function () {
+  showAllPosts = false;
+  filterPosts(showAllPosts);
+
+  $("#all-posts-btn").removeClass("active-btn");
+  $("#my-posts-btn").addClass("active-btn");
+});
+
+function filterPosts(showAllPosts) {
+  console.log(showAllPosts);
+  if (showAllPosts) {
+    posts = allPosts;
+  } else {
+    posts = allPosts.filter((post) => post.userId === 8989); // Placeholder for current user's ID
+  }
+  resetPosts(posts);
 }
