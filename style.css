@@ -1,0 +1,33 @@
+:root {
+  --pink: rgb(248, 23, 117);
+  --grey: rgb(237, 241, 242);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+html h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+}
