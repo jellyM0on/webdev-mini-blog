@@ -158,3 +158,13 @@ function filterPosts(showAllPosts) {
   }
   resetPosts(posts);
 }
+
+// Scroll up button
+
+$("#scroll-up-btn").on("click", function () {
+  scrollUp();
+});
+
+function scrollUp() {
+  $("html, body").animate({ scrollTop: 0 }, 500);
+}

@@ -327,3 +327,28 @@ main {
   width: fit-content;
   border-bottom: dotted 3px var(--pink);
 }
+
+/* scroll up btn */
+#scroll-up-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: var(--grey-light-hover);
+  border-radius: 24px;
+  border: none;
+  padding: 0.5rem;
+}
+
+#scroll-up-btn:hover {
+  cursor: pointer;
+}
+
+#scroll-up-btn img {
+  width: 1.5rem;
+  filter: brightness(0) saturate(100%) invert(22%) sepia(93%) saturate(5414%)
+    hue-rotate(325deg) brightness(100%) contrast(95%);
+}
+
+#scroll-up-btn:hover {
+  background-color: var(--grey-dark-hover);
+}
