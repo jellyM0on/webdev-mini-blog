@@ -232,6 +232,12 @@ main {
   margin-bottom: 0.5rem;
 }
 
+.post-user-id-name {
+  font-weight:normal;
+  font-size: smaller;
+  color: var(--grey-dark-hover);
+}
+
 .post-opts {
   margin-top: 1rem;
   display: flex;

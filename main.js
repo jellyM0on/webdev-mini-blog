@@ -15,7 +15,7 @@ function createPosts(posts) {
         <li class="post">
             <img src="./assets/user.svg" alt="user"/>
             <div>
-                <p class="post-username">${post.userName}</p>
+                <p class="post-username">${post.userName} <span class="post-user-id-name">@${post.userIdName}</span></p>
                 <p class="post-body">${post.body}</p>
                 <div class="post-opts">
                     <div class="post-opts-btns">
@@ -55,6 +55,7 @@ function getPostsWithUsers() {
     const postsWithNames = posts.map((post) => ({
       ...post,
       userName: userMap[post.userId],
+      userIdName: `user-${post.userId}`,
     }));
 
     createPosts(postsWithNames);
