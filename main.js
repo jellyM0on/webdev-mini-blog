@@ -1,5 +1,29 @@
 getPostsWithUsers();
 
+let allPosts;
+let currentPostCount = 0;
+
+let isLoading = false;
+
+// When scrolled to the bottom of the page, load 10 more posts
+$(window).on("scroll", function () {
+  if (currentPostCount >= allPosts.length) return;
+
+  if (
+    !isLoading &&
+    $(window).scrollTop() + $(window).height() >= $(document).height() - 10
+  ) {
+    isLoading = true;
+
+    createPosts(allPosts.slice(currentPostCount, currentPostCount + 10));
+    currentPostCount = currentPostCount + 10;
+
+    setTimeout(() => {
+      isLoading = false;
+    }, 500);
+  }
+});
+
 // Updates character count
 function updateCharCount() {
   const $text = $("#post-input").val();
@@ -16,6 +40,7 @@ function createPosts(posts) {
             <img src="./assets/user.svg" alt="user"/>
             <div>
                 <p class="post-username">${post.userName} <span class="post-user-id-name">@${post.userIdName}</span></p>
+                <h5>${post.title}</h5>
                 <p class="post-body">${post.body}</p>
                 <div class="post-opts">
                     <div class="post-opts-btns">
@@ -44,7 +69,7 @@ function getPostsWithUsers() {
     $.getJSON("https://jsonplaceholder.typicode.com/posts"),
     $.getJSON("https://jsonplaceholder.typicode.com/users")
   ).done(function (postsRes, usersRes) {
-    const posts = postsRes[0].slice(0, 15);
+    const posts = postsRes[0];
     const users = usersRes[0];
 
     const userMap = {};
@@ -58,6 +83,8 @@ function getPostsWithUsers() {
       userIdName: `user-${post.userId}`,
     }));
 
-    createPosts(postsWithNames);
+    allPosts = postsWithNames;
+    currentPostCount = 10;
+    createPosts(postsWithNames.slice(0, 10));
   });
 }

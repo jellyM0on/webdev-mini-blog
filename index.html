@@ -73,7 +73,15 @@
       </section>
 
       <section class="main-posts">
-        <div></div>
+        <div class="posts-filters">
+          <label for="sort-filters">Sort By:</label>
+          <select name="sort-filters" id="sort-filters">
+            <option value="Title" id="title"></option>
+            <option value="userId">User ID</option>
+            <option value="postId">Post ID</option>
+          </select>
+          <button></button>
+        </div>
         <ul id="posts-list"></ul>
       </section>
     </main>
