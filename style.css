@@ -155,6 +155,9 @@ main {
   border: none;
   border-bottom: solid 1px var(--grey);
   border-right: solid 1px var(--grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-header button:hover {
@@ -191,6 +194,13 @@ main {
   border: solid 1px var(--grey);
   padding: 1rem;
   height: 4rem;
+  font-family: inherit;
+}
+
+.main-input #post-title {
+  border-radius: 12px;
+  border: solid 1px var(--grey);
+  padding: 1rem;
 }
 
 .input-details {
@@ -206,11 +216,48 @@ main {
 }
 
 /* post */
+.main-posts {
+  padding: 0 2rem 2rem 2rem;
+}
+
+.posts-filters {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#sort-filters-lbl {
+  font-size: smaller;
+  color: var(--grey-dark-hover);
+}
+
+#sort-filters {
+  border: none;
+}
+
+.posts-filters button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+
+.posts-filters button:hover {
+  background-color: var(--grey-light-hover);
+}
+
+.posts-filters img {
+  width: 1rem;
+  height: 1rem;
+}
+
 #posts-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 0 2rem 2rem 2rem;
 }
 
 .post {
@@ -230,6 +277,12 @@ main {
 .post-username {
   font-weight: bold;
   margin-bottom: 0.5rem;
+}
+
+.post-user-id-name {
+  font-weight: normal;
+  font-size: smaller;
+  color: var(--grey-dark-hover);
 }
 
 .post-opts {
@@ -269,4 +322,40 @@ main {
 .heart-btn {
   filter: brightness(0) saturate(100%) invert(22%) sepia(93%) saturate(5414%)
     hue-rotate(325deg) brightness(100%) contrast(95%);
+}
+
+.active-btn {
+  text-decoration-color: var(--pink);
+  font-weight: bold;
+}
+
+.active-btn > div {
+  display: flex;
+  width: fit-content;
+  border-bottom: dotted 3px var(--pink);
+}
+
+/* scroll up btn */
+#scroll-up-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: var(--grey-light-hover);
+  border-radius: 24px;
+  border: none;
+  padding: 0.5rem;
+}
+
+#scroll-up-btn:hover {
+  cursor: pointer;
+}
+
+#scroll-up-btn img {
+  width: 1.5rem;
+  filter: brightness(0) saturate(100%) invert(22%) sepia(93%) saturate(5414%)
+    hue-rotate(325deg) brightness(100%) contrast(95%);
+}
+
+#scroll-up-btn:hover {
+  background-color: var(--grey-dark-hover);
 }
