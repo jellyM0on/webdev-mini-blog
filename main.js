@@ -1,3 +1,5 @@
+$("#loading").show();
+
 getPostsWithUsers();
 
 let allPosts;
@@ -56,7 +58,6 @@ function createPosts(posts) {
                     </button>
                 </div>
             </div>
-            
         </li>
         `);
   });
@@ -74,25 +75,33 @@ function getPostsWithUsers() {
   $.when(
     $.getJSON("https://jsonplaceholder.typicode.com/posts"),
     $.getJSON("https://jsonplaceholder.typicode.com/users")
-  ).done(function (postsRes, usersRes) {
-    const posts = postsRes[0];
-    const users = usersRes[0];
+  )
+    .done(function (postsRes, usersRes) {
+      $("#loading").hide();
 
-    const userMap = {};
-    users.forEach((user) => {
-      userMap[user.id] = user.name;
+      const posts = postsRes[0];
+      const users = usersRes[0];
+
+      const userMap = {};
+      users.forEach((user) => {
+        userMap[user.id] = user.name;
+      });
+
+      const postsWithNames = posts.map((post) => ({
+        ...post,
+        userName: userMap[post.userId] || "user name",
+        userIdName: `user-${post.userId}`,
+      }));
+
+      allPosts = postsWithNames;
+      currentPostCount = 10;
+      createPosts(postsWithNames.slice(0, 10));
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      $("#loading").hide();
+      console.error("Error fetching data: ", textStatus, errorThrown);
+      alert("Failed to load posts or users. Please try again later.");
     });
-
-    const postsWithNames = posts.map((post) => ({
-      ...post,
-      userName: userMap[post.userId] || "user name",
-      userIdName: `user-${post.userId}`,
-    }));
-
-    allPosts = postsWithNames;
-    currentPostCount = 10;
-    createPosts(postsWithNames.slice(0, 10));
-  });
 }
 
 // Sort functionality
