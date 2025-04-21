@@ -85,7 +85,7 @@ function getPostsWithUsers() {
 
     const postsWithNames = posts.map((post) => ({
       ...post,
-      userName: userMap[post.userId],
+      userName: userMap[post.userId] || "user name",
       userIdName: `user-${post.userId}`,
     }));
 
@@ -150,7 +150,6 @@ $("#my-posts-btn").on("click", function () {
 });
 
 function filterPosts(showAllPosts) {
-  console.log(showAllPosts);
   if (showAllPosts) {
     posts = allPosts;
   } else {
@@ -168,3 +167,24 @@ $("#scroll-up-btn").on("click", function () {
 function scrollUp() {
   $("html, body").animate({ scrollTop: 0 }, 500);
 }
+
+// Post post functionality
+
+function handlePostBtn() {
+  $("#post-btn").on("click", function () {
+    // Get the values from the inputs when POSTing the data:
+    const title = $("#post-title").val();
+    const body = $("#post-input").val();
+    const userId = 8989; // Placeholder for current user's ID
+
+    // Maybe add extra validation so the user can't post empty posts
+  });
+}
+
+// TODO: Create function to POST the post data
+
+// After posting, add the post return value to the allPosts array
+// Maybe add it to the start of the array?
+// Might not need to sort until the user clicks the sort options again so it is easier
+// But might need to call the filterPosts() function again
+// Maybe you can just pass the allPosts as the argument after adding the new post to it
