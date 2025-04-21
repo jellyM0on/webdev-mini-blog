@@ -106,6 +106,8 @@ function getPostsWithUsers() {
 
 // Sort functionality
 
+let showAllPosts = true;
+
 let sortBy = "userId";
 let sortType = "asc";
 
@@ -136,11 +138,12 @@ function sortPosts(sortBy, sortType) {
     }
   });
 
-  resetPosts(allPosts);
+  resetPosts(
+    showAllPosts ? allPosts : allPosts.filter((post) => post.userId === 8989)
+  ); // Placeholder for current user's ID
 }
 
 // Filter functionality
-let showAllPosts = true;
 
 $("#all-posts-btn").on("click", function () {
   showAllPosts = true;
