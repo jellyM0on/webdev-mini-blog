@@ -1,3 +1,5 @@
+$("#loading").show(); 
+
 getPostsWithUsers();
 
 // Updates character count
@@ -31,19 +33,20 @@ function createPosts(posts) {
                     </button>
                 </div>
             </div>
-            
         </li>
         `);
     console.log(post);
   });
 }
 
-// Get posts
 function getPostsWithUsers() {
   $.when(
     $.getJSON("https://jsonplaceholder.typicode.com/posts"),
     $.getJSON("https://jsonplaceholder.typicode.com/users")
   ).done(function (postsRes, usersRes) {
+    
+    $("#loading").hide(); 
+
     const posts = postsRes[0].slice(0, 15);
     const users = usersRes[0];
 
@@ -58,5 +61,10 @@ function getPostsWithUsers() {
     }));
 
     createPosts(postsWithNames);
+  }).fail(function (jqXHR, textStatus, errorThrown) {
+    
+    $("#loading").hide(); 
+    console.error("Error fetching data: ", textStatus, errorThrown);
+    alert("Failed to load posts or users. Please try again later.");
   });
 }
