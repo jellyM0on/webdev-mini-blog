@@ -1,5 +1,3 @@
-$("#loading").show();
-
 getPostsWithUsers();
 
 let allPosts;
@@ -77,8 +75,6 @@ function getPostsWithUsers() {
     $.getJSON("https://jsonplaceholder.typicode.com/users")
   )
     .done(function (postsRes, usersRes) {
-      $("#loading").hide();
-
       const posts = postsRes[0];
       const users = usersRes[0];
 
@@ -97,14 +93,14 @@ function getPostsWithUsers() {
       currentPostCount = 10;
       createPosts(postsWithNames.slice(0, 10));
     })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      $("#loading").hide();
-      console.error("Error fetching data: ", textStatus, errorThrown);
+    .fail(function () {
       alert("Failed to load posts or users. Please try again later.");
     });
 }
 
 // Sort functionality
+
+let showAllPosts = true;
 
 let sortBy = "userId";
 let sortType = "asc";
@@ -136,11 +132,12 @@ function sortPosts(sortBy, sortType) {
     }
   });
 
-  resetPosts(allPosts);
+  resetPosts(
+    showAllPosts ? allPosts : allPosts.filter((post) => post.userId === 8989)
+  ); // Placeholder for current user's ID
 }
 
 // Filter functionality
-let showAllPosts = true;
 
 $("#all-posts-btn").on("click", function () {
   showAllPosts = true;
@@ -180,20 +177,57 @@ function scrollUp() {
 // Post post functionality
 
 function handlePostBtn() {
-  $("#post-btn").on("click", function () {
-    // Get the values from the inputs when POSTing the data:
-    const title = $("#post-title").val();
-    const body = $("#post-input").val();
-    const userId = 8989; // Placeholder for current user's ID
+  const title = $("#post-title").val().trim();
+  const body = $("#post-input").val().trim();
+  const userId = 8989; // Placeholder for current user's ID
 
-    // Maybe add extra validation so the user can't post empty posts
+  if (!title || !body) {
+    alert("Title and body cannot be empty.");
+    return;
+  }
+
+  showOverlay();
+
+  $.ajax({
+    url: "https://jsonplaceholder.typicode.com/posts",
+    method: "POST",
+    contentType: "application/json; charset=UTF-8",
+    data: JSON.stringify({
+      title,
+      body,
+      userId,
+    }),
+    success: function (response) {
+      const newPost = {
+        ...response,
+        userName: "user name",
+        userIdName: `user-${userId}`,
+      };
+
+      allPosts.unshift(newPost);
+      resetPosts(
+        showAllPosts
+          ? allPosts
+          : allPosts.filter((post) => post.userId === userId)
+      );
+
+      $("#post-title").val("");
+      $("#post-input").val("");
+      updateCharCount();
+    },
+    error: function () {
+      alert("Failed to post. Please try again.");
+    },
+    complete: function () {
+      hideOverlay();
+    },
   });
 }
 
-// TODO: Create function to POST the post data
+function showOverlay() {
+  $("#loading-overlay").fadeIn(200);
+}
 
-// After posting, add the post return value to the allPosts array
-// Maybe add it to the start of the array?
-// Might not need to sort until the user clicks the sort options again so it is easier
-// But might need to call the filterPosts() function again
-// Maybe you can just pass the allPosts as the argument after adding the new post to it
+function hideOverlay() {
+  $("#loading-overlay").fadeOut(200);
+}
